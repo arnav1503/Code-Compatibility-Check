@@ -9,26 +9,55 @@ import { z } from "zod";
 const science: Record<string, string> = {
     "gravity": "Force that pulls objects toward Earth.",
     "photosynthesis": "Plants make food using sunlight.",
-    "atom": "Smallest unit of matter.",
-    "energy": "Ability to do work."
+    "atom": "Smallest unit of matter. Consists of protons, neutrons, and electrons.",
+    "energy": "Ability to do work. It comes in many forms like kinetic, potential, and thermal.",
+    "dna": "Deoxyribonucleic acid, the molecule that carries genetic instructions.",
+    "speed of light": "Approximately 299,792,458 meters per second.",
+    "black hole": "A region of spacetime where gravity is so strong that nothing can escape.",
+    "periodic table": "A tabular display of the chemical elements, organized by atomic number.",
+    "cell": "The basic structural, functional, and biological unit of all known organisms."
 };
 
 const grammar: Record<string, string> = {
-    "noun": "Naming word.",
-    "verb": "Action word.",
-    "adjective": "Describes a noun."
+    "noun": "Naming word for a person, place, thing, or idea.",
+    "verb": "Action word or state of being.",
+    "adjective": "Describes or modifies a noun.",
+    "adverb": "Describes or modifies a verb, adjective, or another adverb.",
+    "pronoun": "A word that takes the place of a noun.",
+    "preposition": "Shows relationship between a noun/pronoun and another part of the sentence.",
+    "conjunction": "Joins words, phrases, or clauses together.",
+    "interjection": "A word or phrase used to express strong emotion."
+};
+
+const geography: Record<string, string> = {
+    "mount everest": "The highest mountain on Earth, located in the Himalayas.",
+    "amazon river": "The largest river by discharge volume of water in the world.",
+    "pacific ocean": "The largest and deepest of Earth's oceanic divisions.",
+    "sahara desert": "The largest hot desert in the world, located in Africa.",
+    "nile": "Longest river in Africa, historically considered the longest in the world."
 };
 
 const countries: Record<string, any> = {
-    "india": {"capital":"New Delhi","population":1428000000,"gdp":3.7},
-    "china": {"capital":"Beijing","population":1412000000,"gdp":17.7},
-    "usa": {"capital":"Washington D.C.","population":331000000,"gdp":26.9}
+    "india": {"capital":"New Delhi","population":1428000000,"gdp":3.7, "currency": "Indian Rupee"},
+    "china": {"capital":"Beijing","population":1412000000,"gdp":17.7, "currency": "Yuan"},
+    "usa": {"capital":"Washington D.C.","population":331000000,"gdp":26.9, "currency": "US Dollar"},
+    "uk": {"capital":"London","population":67000000,"gdp":3.1, "currency": "Pound Sterling"},
+    "germany": {"capital":"Berlin","population":83000000,"gdp":4.4, "currency": "Euro"},
+    "japan": {"capital":"Tokyo","population":125000000,"gdp":4.2, "currency": "Yen"},
+    "france": {"capital":"Paris","population":68000000,"gdp":3.0, "currency": "Euro"},
+    "brazil": {"capital":"Brasilia","population":214000000,"gdp":2.1, "currency": "Real"}
 };
 
 const facts = [
     "Earth revolves around the Sun.",
     "Humans have 206 bones.",
-    "Water boils at 100 degrees Celsius."
+    "Water boils at 100 degrees Celsius.",
+    "Honey never spoils. Archaeologists have found edible honey in ancient Egyptian tombs.",
+    "Octopuses have three hearts.",
+    "Bananas are berries, but strawberries aren't.",
+    "A day on Venus is longer than a year on Venus.",
+    "The heart of a shrimp is located in its head.",
+    "It is impossible for most people to lick their own elbow."
 ];
 
 const OWNER_INFO = `My owner is Arnav Raj Singh.
@@ -36,11 +65,25 @@ Born on 15 March.
 A visionary child who loves coding.
 Dev Supreme 👑`;
 
+const SKILLS = [
+  "Voice Interaction (Speak & Listen)",
+  "Complex Math Calculations",
+  "Country Data (Capital, Population, GDP, Currency)",
+  "Science & Grammar Knowledge",
+  "Geography Facts",
+  "Learning New Information (X is Y)",
+  "Random Fun Facts"
+];
+
 async function processMessage(msg: string): Promise<string> {
     const q = msg.toLowerCase();
 
     if (["exit", "quit", "bye"].includes(q)) {
         return "Goodbye Dev Supreme 👑";
+    }
+
+    if (q.includes("skill") || q.includes("what can you do")) {
+      return "I have many skills! I can help with: " + SKILLS.join(", ") + ".";
     }
 
     // OWNER
@@ -55,12 +98,14 @@ async function processMessage(msg: string): Promise<string> {
             const d = countries[c];
             if (q.includes("capital")) return `The capital of ${c.charAt(0).toUpperCase() + c.slice(1)} is ${d.capital}.`;
             if (q.includes("population")) return `${c.charAt(0).toUpperCase() + c.slice(1)} population is ${d.population.toLocaleString()}.`;
-            return `${c.charAt(0).toUpperCase() + c.slice(1)} | Capital: ${d.capital} | GDP: $${d.gdp}T`;
+            if (q.includes("gdp")) return `${c.charAt(0).toUpperCase() + c.slice(1)} GDP is $${d.gdp}T.`;
+            if (q.includes("currency")) return `The currency of ${c.charAt(0).toUpperCase() + c.slice(1)} is ${d.currency}.`;
+            return `${c.charAt(0).toUpperCase() + c.slice(1)} | Capital: ${d.capital} | GDP: $${d.gdp}T | Currency: ${d.currency}`;
         }
     }
 
     // KNOWLEDGE
-    for (const db of [science, grammar]) {
+    for (const db of [science, grammar, geography]) {
         for (const k in db) {
             if (q.includes(k)) return db[k];
         }
