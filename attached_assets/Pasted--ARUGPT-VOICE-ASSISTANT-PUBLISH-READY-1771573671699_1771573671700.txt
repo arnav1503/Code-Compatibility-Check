@@ -1,0 +1,209 @@
+# ==========================================================
+# ARUGPT VOICE ASSISTANT (PUBLISH READY)
+# Created by Arnav Raj Singh (Dev Supreme)
+# ==========================================================
+
+import random
+import math
+import json
+import os
+
+# Try importing voice libraries safely
+VOICE_ENABLED = True
+try:
+    import speech_recognition as sr
+    import pyttsx3
+except:
+    VOICE_ENABLED = False
+
+# ================= VOICE ENGINE =================
+
+if VOICE_ENABLED:
+    engine = pyttsx3.init()
+
+    def speak(text):
+        print("AruGPT:", text)
+        engine.say(text)
+        engine.runAndWait()
+
+    def listen():
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            print("🎤 Listening...")
+            try:
+                audio = r.listen(source, timeout=5)
+                text = r.recognize_google(audio)
+                print("You:", text)
+                return text.lower()
+            except:
+                return ""
+else:
+    def speak(text):
+        print("AruGPT:", text)
+
+    def listen():
+        return input("You: ").lower()
+
+# ================= MEMORY =================
+
+MEMORY_FILE = "arugpt_memory.json"
+
+def load_memory():
+    if os.path.exists(MEMORY_FILE):
+        try:
+            with open(MEMORY_FILE, "r") as f:
+                return json.load(f)
+        except:
+            return {}
+    return {}
+
+def save_memory(mem):
+    with open(MEMORY_FILE, "w") as f:
+        json.dump(mem, f)
+
+memory = load_memory()
+
+# ================= OWNER =================
+
+OWNER_INFO = """My owner is Arnav Raj Singh.
+Born on 15 March.
+A visionary child who loves coding.
+Dev Supreme 👑"""
+
+def owner_engine(q):
+    keys = ["owner","creator","who made you","who created you","arnav"]
+    for k in keys:
+        if k in q:
+            return OWNER_INFO
+    return None
+
+# ================= KNOWLEDGE =================
+
+science = {
+    "gravity": "Force that pulls objects toward Earth.",
+    "photosynthesis": "Plants make food using sunlight.",
+    "atom": "Smallest unit of matter.",
+    "energy": "Ability to do work."
+}
+
+grammar = {
+    "noun": "Naming word.",
+    "verb": "Action word.",
+    "adjective": "Describes a noun."
+}
+
+countries = {
+    "india": {"capital":"New Delhi","population":1428000000,"gdp":3.7},
+    "china": {"capital":"Beijing","population":1412000000,"gdp":17.7},
+    "usa": {"capital":"Washington D.C.","population":331000000,"gdp":26.9}
+}
+
+facts = [
+    "Earth revolves around the Sun.",
+    "Humans have 206 bones.",
+    "Water boils at 100 degrees Celsius."
+]
+
+# ================= ENGINES =================
+
+def country_engine(q):
+    for c in countries:
+        if c in q:
+            d = countries[c]
+            if "capital" in q:
+                return f"The capital of {c.title()} is {d['capital']}."
+            if "population" in q:
+                return f"{c.title()} population is {d['population']:,}."
+            return f"{c.title()} | Capital: {d['capital']} | GDP: ${d['gdp']}T"
+    return None
+
+def knowledge_engine(q):
+    for db in (science, grammar):
+        for k in db:
+            if k in q:
+                return db[k]
+    return None
+
+def math_engine(q):
+    try:
+        if any(op in q for op in "+-*/"):
+            return str(eval(q))
+    except:
+        return None
+    return None
+
+# ================= MAIN =================
+
+def arugpt():
+    print("===================================")
+    print(" ARUGPT VOICE ASSISTANT 🤖🎤")
+    print("===================================")
+
+    if VOICE_ENABLED:
+        mode = input("Choose mode (voice/text): ").lower()
+    else:
+        print("Voice not available, using text mode.")
+        mode = "text"
+
+    while True:
+
+        if mode == "voice":
+            q = listen()
+            if not q:
+                continue
+        else:
+            q = input("\nYou: ").lower()
+
+        if q in ["exit","quit","bye"]:
+            speak("Goodbye Dev Supreme 👑")
+            break
+
+        # OWNER
+        res = owner_engine(q)
+        if res:
+            speak(res)
+            continue
+
+        # COUNTRY
+        res = country_engine(q)
+        if res:
+            speak(res)
+            continue
+
+        # KNOWLEDGE
+        res = knowledge_engine(q)
+        if res:
+            speak(res)
+            continue
+
+        # MATH
+        res = math_engine(q)
+        if res:
+            speak(res)
+            continue
+
+        # MEMORY
+        if q in memory:
+            speak(memory[q])
+            continue
+
+        # LEARN
+        if " is " in q:
+            parts = q.split(" is ")
+            if len(parts) == 2:
+                memory[parts[0]] = parts[1]
+                save_memory(memory)
+                speak("Learned 📚")
+                continue
+
+        # FACT
+        if "fact" in q:
+            speak(random.choice(facts))
+            continue
+
+        speak("I am still learning. Ask something else 🚀")
+
+# ================= RUN =================
+
+if __name__ == "__main__":
+    arugpt()
