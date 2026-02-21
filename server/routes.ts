@@ -190,7 +190,15 @@ async function processMessage(msg: string): Promise<string> {
     }
 
     if (q.includes("namaste") || q.includes("hello") || q.includes("hi")) {
-        return "Namaste! Main AruGPT hoon. Main aapki kya madad kar sakta hoon?";
+        return "Hi! How are you? | Namaste! Kaise hain aap?";
+    }
+
+    if (q.includes("i am fine") || q.includes("main thik hoon") || q.includes("thik hoon")) {
+        return "Glad to hear that! How can I help you today? | Yeh sunkar khushi hui! Main aaj aapki kya madad kar sakta hoon?";
+    }
+
+    if (q.includes("how are you") || q.includes("kaise ho") || q.includes("kaise hain")) {
+        return "I am functioning at peak efficiency, thank you! How are you? | Main bilkul thik hoon, dhanyavad! Aap kaise hain?";
     }
 
     return "I am still learning. Ask something else 🚀 | Main abhi seekh raha hoon. Kuch aur puchein.";

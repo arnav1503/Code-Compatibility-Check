@@ -244,7 +244,7 @@ export default function Home() {
             Neural Network Interface • Quantum Encryption Active • Multilingual Support
           </p>
           <p className="text-[11px] text-white/60 font-black tracking-tight">
-            Crafted with ❤️ by <span className="text-primary italic">Arnav Raj Singh</span>
+            Designed and Developed by <span className="text-primary italic">Arnav Raj Singh</span>
           </p>
           <p className="text-[9px] text-muted-foreground/40 font-medium uppercase tracking-widest">
             Powered by Python & Neural Synthesis
