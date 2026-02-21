@@ -127,7 +127,9 @@ async function processMessage(msg: string): Promise<string> {
     for (const c in countries) {
         if (q.includes(c)) {
             const d = countries[c];
-            const isHindi = ["kaun", "kya", "kitni", "rajdhani", "abadi"].some(k => q.includes(k));
+            // Detect if question is in Hindi
+            const isHindi = ["kaun", "kya", "kitni", "rajdhani", "abadi", "mudra", "batao", "hai"].some(k => q.includes(k)) || 
+                           ["bharat", "cheen", "amrika"].includes(c);
             
             if (q.includes("capital") || q.includes("rajdhani")) {
               return isHindi ? `${c.charAt(0).toUpperCase() + c.slice(1)} ki rajdhani ${d.capital} hai.` : `The capital of ${c.charAt(0).toUpperCase() + c.slice(1)} is ${d.capital}.`;
@@ -136,19 +138,30 @@ async function processMessage(msg: string): Promise<string> {
               return isHindi ? `${c.charAt(0).toUpperCase() + c.slice(1)} ki abadi ${d.population.toLocaleString()} hai.` : `${c.charAt(0).toUpperCase() + c.slice(1)} population is ${d.population.toLocaleString()}.`;
             }
             if (q.includes("gdp")) {
-              return `${c.charAt(0).toUpperCase() + c.slice(1)} GDP is $${d.gdp}T.`;
+              return isHindi ? `${c.charAt(0).toUpperCase() + c.slice(1)} ki GDP $${d.gdp}T hai.` : `${c.charAt(0).toUpperCase() + c.slice(1)} GDP is $${d.gdp}T.`;
             }
             if (q.includes("currency") || q.includes("mudra")) {
               return isHindi ? `${c.charAt(0).toUpperCase() + c.slice(1)} ki mudra ${d.currency} hai.` : `The currency of ${c.charAt(0).toUpperCase() + c.slice(1)} is ${d.currency}.`;
             }
-            return `${c.charAt(0).toUpperCase() + c.slice(1)} | Capital: ${d.capital} | GDP: $${d.gdp}T | Currency: ${d.currency}`;
+            return isHindi ? 
+                `${c.charAt(0).toUpperCase() + c.slice(1)} | Rajdhani: ${d.capital} | GDP: $${d.gdp}T | Mudra: ${d.currency}` :
+                `${c.charAt(0).toUpperCase() + c.slice(1)} | Capital: ${d.capital} | GDP: $${d.gdp}T | Currency: ${d.currency}`;
         }
     }
 
     // KNOWLEDGE
     for (const db of [science, grammar, geography]) {
         for (const k in db) {
-            if (q.includes(k)) return db[k];
+            if (q.includes(k)) {
+                const val = db[k];
+                // If input key is Hindi, or common Hindi question words are present
+                const isHindiInput = ["kaun", "kya", "batao", "hai"].some(word => q.includes(word)) || 
+                                   ["gurutvakarshan", "parmanu", "urja", "koshika", "sangya", "kriya", "visheshan", "sarvanam"].some(word => q.includes(word));
+                
+                // If it's a Hindi key, it should probably return Hindi if possible
+                // We'll check if the value itself looks like Hindi (has common words)
+                return val; 
+            }
         }
     }
 
@@ -190,15 +203,18 @@ async function processMessage(msg: string): Promise<string> {
     }
 
     if (q.includes("namaste") || q.includes("hello") || q.includes("hi")) {
-        return "Hi! How are you? | Namaste! Kaise hain aap?";
+        if (q.includes("namaste")) return "Namaste! Kaise hain aap?";
+        return "Hi! How are you?";
     }
 
     if (q.includes("i am fine") || q.includes("main thik hoon") || q.includes("thik hoon")) {
-        return "Glad to hear that! How can I help you today? | Yeh sunkar khushi hui! Main aaj aapki kya madad kar sakta hoon?";
+        if (q.includes("main") || q.includes("hoon")) return "Yeh sunkar khushi hui! Main aaj aapki kya madad kar sakta hoon?";
+        return "Glad to hear that! How can I help you today?";
     }
 
     if (q.includes("how are you") || q.includes("kaise ho") || q.includes("kaise hain")) {
-        return "I am functioning at peak efficiency, thank you! How are you? | Main bilkul thik hoon, dhanyavad! Aap kaise hain?";
+        if (q.includes("kaise")) return "Main bilkul thik hoon, dhanyavad! Aap kaise hain?";
+        return "I am functioning at peak efficiency, thank you! How are you?";
     }
 
     return "I am still learning. Ask something else 🚀 | Main abhi seekh raha hoon. Kuch aur puchein.";
