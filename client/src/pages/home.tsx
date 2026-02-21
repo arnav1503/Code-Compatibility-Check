@@ -241,10 +241,13 @@ export default function Home() {
         />
         <div className="text-center mt-6 flex flex-col items-center gap-1">
           <p className="text-[10px] text-primary/40 font-black uppercase tracking-[0.4em]">
-            Neural Network Interface • Quantum Encryption Active
+            Neural Network Interface • Quantum Encryption Active • Multilingual Support
           </p>
-          <p className="text-[11px] text-white/40 font-bold tracking-tighter">
-            cc Arnav Raj Singh hardcoded by python
+          <p className="text-[11px] text-white/60 font-black tracking-tight">
+            Crafted with ❤️ by <span className="text-primary italic">Arnav Raj Singh</span>
+          </p>
+          <p className="text-[9px] text-muted-foreground/40 font-medium uppercase tracking-widest">
+            Powered by Python & Neural Synthesis
           </p>
         </div>
       </footer>
