@@ -6,50 +6,49 @@ import { z } from "zod";
 
 // ================= KNOWLEDGE =================
 
-const science: Record<string, string> = {
-    "gravity": "Force that pulls objects toward Earth.",
-    "gurutvakarshan": "Prithvi ki taraf khinchne wala bal.",
-    "photosynthesis": "Plants make food using sunlight.",
-    "prakash sanshleshan": "Paudhe suraj ki roshni se khana banate hain.",
-    "atom": "Smallest unit of matter. Consists of protons, neutrons, and electrons.",
-    "parmanu": "Padarth ki sabse chhoti ikai.",
-    "energy": "Ability to do work. It comes in many forms like kinetic, potential, and thermal.",
-    "urja": "Kaam karne ki kshamta.",
-    "dna": "Deoxyribonucleic acid, the molecule that carries genetic instructions.",
-    "speed of light": "Approximately 299,792,458 meters per second.",
-    "prakash ki gati": "Lagbhag 29,97,92,458 meter prati second.",
-    "black hole": "A region of spacetime where gravity is so strong that nothing can escape.",
-    "periodic table": "A tabular display of the chemical elements, organized by atomic number.",
-    "cell": "The basic structural, functional, and biological unit of all known organisms.",
-    "koshika": "Jeev ki sabse chhoti ikai."
+    "gravity": "Gravity: The force that pulls objects toward Earth. | Gurutvakarshan: Prithvi ki taraf khinchne wala bal.",
+    "gurutvakarshan": "Gurutvakarshan: Prithvi ki taraf khinchne wala bal. | Gravity: The force that pulls objects toward Earth.",
+    "photosynthesis": "Photosynthesis: Plants make food using sunlight. | Prakash Sanshleshan: Paudhe suraj ki roshni se khana banate hain.",
+    "prakash sanshleshan": "Prakash Sanshleshan: Paudhe suraj ki roshni se khana banate hain. | Photosynthesis: Plants make food using sunlight.",
+    "atom": "Atom: Smallest unit of matter. | Parmanu: Padarth ki sabse chhoti ikai.",
+    "parmanu": "Parmanu: Padarth ki sabse chhoti ikai. | Atom: Smallest unit of matter.",
+    "energy": "Energy: Ability to do work. | Urja: Kaam karne ki kshamta.",
+    "urja": "Urja: Kaam karne ki kshamta. | Energy: Ability to do work.",
+    "dna": "DNA: Deoxyribonucleic acid, the molecule that carries genetic instructions.",
+    "speed of light": "Speed of Light: Approximately 299,792,458 meters per second. | Prakash ki gati: Lagbhag 29,97,92,458 meter prati second.",
+    "prakash ki gati": "Prakash ki gati: Lagbhag 29,97,92,458 meter prati second. | Speed of Light: Approximately 299,792,458 meters per second.",
+    "black hole": "Black Hole: A region of spacetime where gravity is so strong that nothing can escape.",
+    "periodic table": "Periodic Table: A tabular display of the chemical elements.",
+    "cell": "Cell: The basic structural, functional, and biological unit of all known organisms. | Koshika: Jeev ki sabse chhoti ikai.",
+    "koshika": "Koshika: Jeev ki sabse chhoti ikai. | Cell: The basic structural, functional, and biological unit of all known organisms."
 };
 
 const grammar: Record<string, string> = {
-    "noun": "Naming word for a person, place, thing, or idea.",
-    "sangya": "Kisi vyakti, vastu ya sthan ka naam.",
-    "verb": "Action word or state of being.",
-    "kriya": "Kaam hone ka pata chalta hai.",
-    "adjective": "Describes or modifies a noun.",
-    "visheshan": "Sangya ki visheshta batane wale shabd.",
-    "adverb": "Describes or modifies a verb, adjective, or another adverb.",
-    "kriya visheshan": "Kriya ki visheshta batane wale shabd.",
-    "pronoun": "A word that takes the place of a noun.",
-    "sarvanam": "Sangya ke sthan par aane wale shabd.",
-    "preposition": "Shows relationship between a noun/pronoun and another part of the sentence.",
-    "conjunction": "Joins words, phrases, or clauses together.",
-    "interjection": "A word or phrase used to express strong emotion."
+    "noun": "Noun: Naming word for a person, place, or thing. | Sangya: Kisi vyakti, vastu ya sthan ka naam.",
+    "sangya": "Sangya: Kisi vyakti, vastu ya sthan ka naam. | Noun: Naming word for a person, place, or thing.",
+    "verb": "Verb: Action word or state of being. | Kriya: Kaam hone ka pata chalta hai.",
+    "kriya": "Kriya: Kaam hone ka pata chalta hai. | Verb: Action word or state of being.",
+    "adjective": "Adjective: Describes or modifies a noun. | Visheshan: Sangya ki visheshta batane wale shabd.",
+    "visheshan": "Visheshan: Sangya ki visheshta batane wale shabd. | Adjective: Describes or modifies a noun.",
+    "adverb": "Adverb: Describes or modifies a verb. | Kriya Visheshan: Kriya ki visheshta batane wale shabd.",
+    "kriya visheshan": "Kriya Visheshan: Kriya ki visheshta batane wale shabd. | Adverb: Describes or modifies a verb.",
+    "pronoun": "Pronoun: A word that takes the place of a noun. | Sarvanam: Sangya ke sthan par aane wale shabd.",
+    "sarvanam": "Sarvanam: Sangya ke sthan par aane wale shabd. | Pronoun: A word that takes the place of a noun.",
+    "preposition": "Preposition: Shows relationship between words.",
+    "conjunction": "Conjunction: Joins words or phrases together.",
+    "interjection": "Interjection: Expresses strong emotion."
 };
 
 const geography: Record<string, string> = {
-    "mount everest": "The highest mountain on Earth, located in the Himalayas.",
-    "amazon river": "The largest river by discharge volume of water in the world.",
-    "amazon nadi": "Duniya ki sabse badi nadi.",
-    "pacific ocean": "The largest and deepest of Earth's oceanic divisions.",
-    "prashant mahasagar": "Duniya ka sabse bada mahasagar.",
-    "sahara desert": "The largest hot desert in the world, located in Africa.",
-    "sahara registan": "Duniya ka sabse bada registan.",
-    "nile": "Longest river in Africa, historically considered the longest in the world.",
-    "neel nadi": "Duniya ki sabse lambi nadi."
+    "mount everest": "Mount Everest: The highest mountain on Earth, located in the Himalayas. | Mount Everest: Duniya ki sabse unchi choti.",
+    "amazon river": "Amazon River: The largest river by volume. | Amazon Nadi: Duniya ki sabse badi nadi.",
+    "amazon nadi": "Amazon Nadi: Duniya ki sabse badi nadi. | Amazon River: The largest river by volume.",
+    "pacific ocean": "Pacific Ocean: The largest and deepest ocean. | Prashant Mahasagar: Duniya ka sabse bada mahasagar.",
+    "prashant mahasagar": "Prashant Mahasagar: Duniya ka sabse bada mahasagar. | Pacific Ocean: The largest and deepest ocean.",
+    "sahara desert": "Sahara Desert: The largest hot desert. | Sahara Registan: Duniya ka sabse bada registan.",
+    "sahara registan": "Sahara Registan: Duniya ka sabse bada registan. | Sahara Desert: The largest hot desert.",
+    "nile": "Nile: Longest river in the world. | Neel Nadi: Duniya ki sabse lambi nadi.",
+    "neel nadi": "Neel Nadi: Duniya ki sabse lambi nadi. | Nile: Longest river in the world."
 };
 
 const countries: Record<string, any> = {
@@ -67,33 +66,20 @@ const countries: Record<string, any> = {
 };
 
 const facts = [
-    "Earth revolves around the Sun.",
-    "Prithvi Surya ke charon or ghoomti hai.",
-    "Humans have 206 bones.",
-    "Manushya ke sharir mein 206 haddiyan hoti hain.",
-    "Water boils at 100 degrees Celsius.",
-    "Pani 100 degree Celsius par ubalta hai.",
-    "Honey never spoils. Archaeologists have found edible honey in ancient Egyptian tombs.",
-    "Shahad kabhi kharab nahi hota.",
-    "Octopuses have three hearts.",
-    "Octopus ke teen dil hote hain.",
-    "Bananas are berries, but strawberries aren't.",
-    "Kela ek berry hai.",
-    "A day on Venus is longer than a year on Venus.",
-    "Venus par ek din uske ek saal se bada hota hai.",
-    "The heart of a shrimp is located in its head.",
-    "Shrimp ka dil uske sir mein hota hai.",
+    "Earth revolves around the Sun. | Prithvi Surya ke charon or ghoomti hai.",
+    "Humans have 206 bones. | Manushya ke sharir mein 206 haddiyan hoti hain.",
+    "Water boils at 100 degrees Celsius. | Pani 100 degree Celsius par ubalta hai.",
+    "Honey never spoils. | Shahad kabhi kharab nahi hota.",
+    "Octopuses have three hearts. | Octopus ke teen dil hote hain.",
+    "Bananas are berries, but strawberries aren't. | Kela ek berry hai.",
+    "A day on Venus is longer than a year on Venus. | Venus par ek din uske ek saal se bada hota hai.",
+    "The heart of a shrimp is located in its head. | Shrimp ka dil uske sir mein hota hai.",
     "It is impossible for most people to lick their own elbow."
 ];
 
-const OWNER_INFO = `My owner is Arnav Raj Singh.
-Born on 15 March.
-A visionary child who loves coding.
-Dev Supreme 👑
+const OWNER_INFO = `My owner is Arnav Raj Singh. Born on 15 March. A visionary child who loves coding. Dev Supreme 👑
 
-Mere malik Arnav Raj Singh hain.
-Unka janam 15 March ko hua tha.
-Woh ek pratibhashali bachhe hain jinhe coding pasand hai.`;
+Mere malik Arnav Raj Singh hain. Unka janam 15 March ko hua tha. Woh ek pratibhashali bachhe hain jinhe coding pasand hai.`;
 
 const SKILLS = [
   "Voice Interaction (Speak & Listen)",
