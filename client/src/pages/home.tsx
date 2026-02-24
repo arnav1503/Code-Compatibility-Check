@@ -144,7 +144,7 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="space-y-4 overflow-y-auto pr-2 max-h-[calc(100vh-250px)] custom-scrollbar">
+              <div className="space-y-4 overflow-y-auto pr-2 max-h-[400px] custom-scrollbar">
                 {SKILLS.map((skill, i) => (
                   <motion.div 
                     key={skill.name}
