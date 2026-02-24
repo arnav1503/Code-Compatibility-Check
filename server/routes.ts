@@ -202,19 +202,21 @@ async function processMessage(msg: string): Promise<string> {
         return facts[Math.floor(Math.random() * facts.length)];
     }
 
-    if (q.includes("namaste") || q.includes("hello") || q.includes("hi")) {
+    // GREETINGS
+    const greetings = ["namaste", "hello", "hi", "hey", "hola"];
+    if (greetings.some(g => q.startsWith(g) || q.includes(" " + g))) {
         if (q.includes("namaste")) return "Namaste! Kaise hain aap?";
         return "Hi! How are you?";
     }
 
-    if (q.includes("i am fine") || q.includes("main thik hoon") || q.includes("thik hoon")) {
-        if (q.includes("main") || q.includes("hoon")) return "Yeh sunkar khushi hui! Main aaj aapki kya madad kar sakta hoon?";
-        return "Glad to hear that! How can I help you today?";
-    }
-
-    if (q.includes("how are you") || q.includes("kaise ho") || q.includes("kaise hain")) {
+    if (q.includes("kaise ho") || q.includes("kaise hain") || q.includes("how are you")) {
         if (q.includes("kaise")) return "Main bilkul thik hoon, dhanyavad! Aap kaise hain?";
         return "I am functioning at peak efficiency, thank you! How are you?";
+    }
+
+    if (q.includes("thik hoon") || q.includes("badhiya") || q.includes("fine") || q.includes("good")) {
+        if (q.includes("thik") || q.includes("badhiya")) return "Yeh sunkar khushi hui! Main aaj aapki kya madad kar sakta hoon?";
+        return "Glad to hear that! How can I help you today?";
     }
 
     return "I am still learning. Ask something else 🚀 | Main abhi seekh raha hoon. Kuch aur puchein.";
