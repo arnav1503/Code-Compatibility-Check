@@ -6,6 +6,7 @@ import { z } from "zod";
 
 // ================= KNOWLEDGE =================
 
+const science: Record<string, string> = {
     "gravity": "Gravity: The force that pulls objects toward Earth. | Gurutvakarshan: Prithvi ki taraf khinchne wala bal.",
     "gurutvakarshan": "Gurutvakarshan: Prithvi ki taraf khinchne wala bal. | Gravity: The force that pulls objects toward Earth.",
     "photosynthesis": "Photosynthesis: Plants make food using sunlight. | Prakash Sanshleshan: Paudhe suraj ki roshni se khana banate hain.",
@@ -16,7 +17,7 @@ import { z } from "zod";
     "urja": "Urja: Kaam karne ki kshamta. | Energy: Ability to do work.",
     "dna": "DNA: Deoxyribonucleic acid, the molecule that carries genetic instructions.",
     "speed of light": "Speed of Light: Approximately 299,792,458 meters per second. | Prakash ki gati: Lagbhag 29,97,92,458 meter prati second.",
-    "prakash ki gati": "Prakash ki gati: Lagbhag 29,97,92,458 meter prati second. | Speed of Light: Approximately 299,792,458 meters per second.",
+    "prakash ki gati": "Prakash ki gati: Lagbhag 29,97,92,458 meter prati second.",
     "black hole": "Black Hole: A region of spacetime where gravity is so strong that nothing can escape.",
     "periodic table": "Periodic Table: A tabular display of the chemical elements.",
     "cell": "Cell: The basic structural, functional, and biological unit of all known organisms. | Koshika: Jeev ki sabse chhoti ikai.",
